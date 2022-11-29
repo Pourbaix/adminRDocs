@@ -1,5 +1,8 @@
 import csv
+import os
 from pyad import *
+from dotenv import load_dotenv
+load_dotenv()  # take environment variables from .env.
 
 def createuserfromcsv():
     #takes full file path
@@ -8,7 +11,7 @@ def createuserfromcsv():
     csv_data = csv.reader(data)
     data_lines = list(csv_data)
     #load admin information
-    pyad.set_defaults(ldap_server="DC-01.l1-2.lab",username="Administrator",password="Aymar123-")
+    pyad.set_defaults(ldap_server="DC-01.l1-2.lab", username= os.getenv('USERNAME'), password= os.getenv('PASSWORD'))
 
     for line in data_lines[1:]:
         user = line[0]
